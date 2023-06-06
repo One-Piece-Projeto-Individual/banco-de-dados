@@ -20,6 +20,12 @@ fkPersonagem int, constraint fkPers foreign key (fkPersonagem) references person
 desc usuario;
 select * from usuario;
 
+create table codigo(
+idCodigo int primary key auto_increment,
+codigo char(8),
+fkUsuario int, constraint fkUsuario foreign key (fkUsuario) references usuario(idUsuario)
+);
+
 insert into personagem(nomePersonagem) values
 ('luffy'),
 ('zoro'),
@@ -48,11 +54,23 @@ insert into usuario(nome, email, senha, fkPersonagem) values
 ('Paulo', 'usuario11@gmail.com', 'senha112', 1),
 ('Fabio','fabio@gmail.com','12345678', 3);
 
-
+INSERT INTO codigo (codigo, fkUsuario) VALUES
+('ABCD1234', 1),
+('EFGH5678', 2),
+('IJKL9012', 3),
+('MNOP3456', 4),
+('QRST7890', 5),
+('UVWX1234', 6),
+('YZAB5678', 7),
+('CDEF9012', 8),
+('GHIJ3456', 9),
+('KLMN7890', 10);
 
 select * from personagem join usuario on 
 fkPersonagem = idPersonagem;
 
+ select* from usuario join codigo on
+ idUsuario = fkUsuario;
 
 SELECT COUNT(usuario.fkPersonagem) as voto, personagem.nomePersonagem AS personagem 
 FROM usuario JOIN personagem ON  personagem.idPersonagem = usuario.fkPersonagem group by usuario.fkPersonagem;
